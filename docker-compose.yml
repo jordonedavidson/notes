@@ -4,7 +4,7 @@ services:
 
   hugo-build:
     image: klakegg/hugo:pandoc
-    name: notes-build
+    container_name: notes-build
     volumes: 
       - ".:/src"
     ports:
@@ -12,8 +12,17 @@ services:
 
   hugo-server:
     image: klakegg/hugo:pandoc
-    name: notes-server
+    container_name: notes-server
     command: server
+    volumes: 
+      - ".:/src"
+    ports:
+      - "1313:1313"
+
+  hugo-command:
+    image: klakegg/hugo:pandoc
+    container_name: notes-command
+    command: ${COMMAND}
     volumes: 
       - ".:/src"
     ports:
