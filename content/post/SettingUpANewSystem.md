@@ -1,3 +1,15 @@
+---
+title: Setting up a new Development System
+date: "2019-03-22"
+categories:
+  - Development
+  - Servers
+tags:
+  - ubuntu
+  - mysql
+  - php
+---
+
 # Setting up a New Development System (Ubuntu >= 18.04)
 
 ## MySQL
