@@ -41,6 +41,12 @@ jobs:
         password: ${{ secrets.DOCKER_PASS }}
 
     steps:
+      - name: Pull in the code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
       - name: Prove where we are
         shell: bash
         run: |
