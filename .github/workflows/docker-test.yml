@@ -61,8 +61,7 @@ jobs:
           neofetch
           ls -l
       - name: Connect to another server
-        run: ssh ${{ secrets.UAT_SERVER_SSH }}
-      - name: Internal server info
         run: |
+          ssh ${{ secrets.UAT_SERVER_SSH }}
           neofetch
           ls -l
