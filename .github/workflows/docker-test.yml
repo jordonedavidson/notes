@@ -52,6 +52,8 @@ jobs:
           neofetch
           ls -la
   # Use self-hosted runner.
+  # Need to instantiate one self-hosted runner per repo
+  # Or do it at the Org level so that all associated repos can use it.
   self_hosted:
     runs-on: docker-mta
 
