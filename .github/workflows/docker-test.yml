@@ -51,3 +51,12 @@ jobs:
           apt update && apt install neofetch -y
           neofetch
           ls -la
+  # Use self-hosted runner.
+  self_hosted:
+    runs-on: docker-mta
+
+    steps:
+      - name: Runner machine info
+        run: |
+          neofetch
+          ls -l
