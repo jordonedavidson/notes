@@ -47,3 +47,4 @@ jobs:
           pwd
           apt update && apt install neofetch -y
           neofetch
+          ls -la
