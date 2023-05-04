@@ -54,19 +54,19 @@ jobs:
   # Use self-hosted runner.
   # Need to instantiate one self-hosted runner per repo
   # Or do it at the Org level so that all associated repos can use it.
-  self_hosted:
-    runs-on: docker-mta
+  # self_hosted:
+  #   runs-on: docker-mta
 
-    steps:
-      - name: Runner machine info
-        run: |
-          neofetch
-          ls -l
-      # Need to run all the commands for the remote server through the ssh command.
-      # This will be tricky but should work nonetheless.
-      - name: Connect to another server
-        run: |
-          ssh ${{ secrets.UAT_SERVER_SSH }} \
-          'neofetch && \
-          cd container-site && \
-          ls -l'
+  #   steps:
+  #     - name: Runner machine info
+  #       run: |
+  #         neofetch
+  #         ls -l
+  #     # Need to run all the commands for the remote server through the ssh command.
+  #     # This will be tricky but should work nonetheless.
+  #     - name: Connect to another server
+  #       run: |
+  #         ssh ${{ secrets.UAT_SERVER_SSH }} \
+  #         'neofetch && \
+  #         cd container-site && \
+  #         ls -l'
