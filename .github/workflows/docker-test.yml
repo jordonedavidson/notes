@@ -66,5 +66,5 @@ jobs:
         run: |
           ssh ${{ secrets.UAT_SERVER_SSH }} \
           'neofetch && \
-          cd container-site \
+          cd container-site && \
           ls -l'
