@@ -39,9 +39,7 @@ jobs:
       credentials:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASS }}
-    
+
     steps:
       - name: Prove where we are
         run: pwd
-
-    steps
