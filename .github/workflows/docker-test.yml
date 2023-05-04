@@ -43,4 +43,6 @@ jobs:
     steps:
       - name: Prove where we are
         shell: bash
-        run: pwd
+        run: |
+          pwd
+          docker image ls
