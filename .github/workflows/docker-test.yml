@@ -60,8 +60,11 @@ jobs:
         run: |
           neofetch
           ls -l
+      # Need to run all the commands for the remote server through the ssh command.
+      # This will be tricky but should work nonetheless.
       - name: Connect to another server
         run: |
           ssh ${{ secrets.UAT_SERVER_SSH }} \
           'neofetch && \
+          cd container-site \
           ls -l'
