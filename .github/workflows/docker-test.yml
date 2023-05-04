@@ -45,4 +45,5 @@ jobs:
         shell: bash
         run: |
           pwd
-          docker image ls
+          apt update && apt install neofetch -y
+          neofetch
