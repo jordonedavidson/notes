@@ -25,7 +25,6 @@ jobs:
           registry: docker.mta.ca
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
-        run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
       - name: Pull an image
