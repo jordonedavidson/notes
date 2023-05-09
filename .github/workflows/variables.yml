@@ -1,0 +1,30 @@
+# Testing connectivity to private docker registry.
+name: Testing docker connections.
+
+# Adding [no ci] to the commit message tells Github Actions to ignore the push
+
+# placeholder environment varibles
+env:
+  WORKFLOW_ONE: ""
+  WORKFLOW_TWO: ""
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push request events but only for the "variables" branch
+  push:
+    branches: ["variables"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Testing setting workflow wide env variables inside a job.
+  set_variables:
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: update workflow variables
+      -run: |
+        echo "Workflow one: ${{ env.WORKFLOW_ONE }}, workflow two: ${{ env.WORKFLOW_TWO }}."
+        echo "WORKFLOW_ONE=1234" >> $GITHUB_ENV
+        echo "WORKFLOW_TWO=dave" >> $GITHUB_ENV
+        echo "Workflow one: ${{ env.WORKFLOW_ONE }}, workflow two: ${{ env.WORKFLOW_TWO }}."
