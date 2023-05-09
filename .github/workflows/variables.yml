@@ -41,7 +41,7 @@ jobs:
 
   report_on_variables:
     runs-on: ubuntu-latest
-    needs: set_varibles
+    needs: set_variables
 
     steps:
       - name: report variables
