@@ -38,10 +38,10 @@ jobs:
     needs: set_variables
 
     env:
-      WORKFLOW_ONE: ${{ needs.set_variables.ouputs.W1 }}
-      WORKFLOW_TWO: ${{ needs.set_variables.ouputs.W2 }}
-      JOB_ONE: ${{ needs.set_variables.ouputs.J1 }}
-      JOB_TWO: ${{ needs.set_variables.ouputs.J2 }}
+      WORKFLOW_ONE: ${{ needs.set_variables.outputs.W1 }}
+      WORKFLOW_TWO: ${{ needs.set_variables.outputs.W2 }}
+      JOB_ONE: ${{ needs.set_variables.outputs.J1 }}
+      JOB_TWO: ${{ needs.set_variables.outputs.J2 }}
 
     steps:
       - name: report variables
