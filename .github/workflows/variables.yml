@@ -1,5 +1,5 @@
 # Testing connectivity to private docker registry.
-name: Testing docker connections.
+name: Testing variable setting.
 
 # Adding [no ci] to the commit message tells Github Actions to ignore the push
 
@@ -28,3 +28,9 @@ jobs:
           echo "WORKFLOW_ONE=1234" >> $GITHUB_ENV
           echo "WORKFLOW_TWO=dave" >> $GITHUB_ENV
           echo "Workflow one: ${{ env.WORKFLOW_ONE }}, workflow two: ${{ env.WORKFLOW_TWO }}."
+
+    - name: set local job variables
+      run: |
+          echo "JOB_ONE=1234" >> $GITHUB_ENV
+          echo "JOB_TWO=dave" >> $GITHUB_ENV
+          echo "Job one: ${{ env.JOB_ONE }}, job two: ${{ env.JOB_TWO }}."
