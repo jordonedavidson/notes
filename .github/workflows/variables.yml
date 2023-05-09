@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      -name: update workflow variables
-      -run: |
+      - name: update workflow variables
+      - run: |
         echo "Workflow one: ${{ env.WORKFLOW_ONE }}, workflow two: ${{ env.WORKFLOW_TWO }}."
         echo "WORKFLOW_ONE=1234" >> $GITHUB_ENV
         echo "WORKFLOW_TWO=dave" >> $GITHUB_ENV
