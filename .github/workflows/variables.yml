@@ -3,11 +3,6 @@ name: Testing variable setting.
 
 # Adding [no ci] to the commit message tells Github Actions to ignore the push
 
-# placeholder environment varibles
-env:
-  WORKFLOW_ONE: ""
-  WORKFLOW_TWO: ""
-
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push request events but only for the "variables" branch
@@ -25,7 +20,7 @@ jobs:
       W1: ${{ steps.workflow.outputs.WORKFLOW_ONE }}
       W2: ${{ steps.workflow.outputs.WORKFLOW_TWO }}
       J1: ${{ steps.job.outputs.JOB_ONE }}
-      J1: ${{ steps.job.outputs.JOB_TWO }}
+      J2: ${{ steps.job.outputs.JOB_TWO }}
 
     steps:
       - id: workflow
@@ -42,11 +37,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: set_variables
 
-    env: 
+    env:
       WORKFLOW_ONE: ${{ needs.set_variables.ouputs.W1 }}
       WORKFLOW_TWO: ${{ needs.set_variables.ouputs.W2 }}
       JOB_ONE: ${{ needs.set_variables.ouputs.J1 }}
-      JOB_ONE: ${{ needs.set_variables.ouputs.J2 }}
+      JOB_TWO: ${{ needs.set_variables.ouputs.J2 }}
 
     steps:
       - name: report variables
