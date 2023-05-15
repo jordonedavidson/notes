@@ -4,7 +4,7 @@ name: Testing variable setting.
 # Adding [no ci] to the commit message tells Github Actions to ignore the push
 env:
   SHA: ${{ format('{0}_{1}', 'sha', github.sha) }}
-  TODAY: ${{ date('%y.%m.%d' }}
+  TODAY: ${{ date('%y.%m.%d') }}
   
 # Controls when the workflow will run
 on:
