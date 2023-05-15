@@ -4,6 +4,8 @@ name: Testing variable setting.
 # Adding [no ci] to the commit message tells Github Actions to ignore the push
 env:
   SHA: ${{ format('{0}_{1}', 'sha', github.sha) }}
+  TODAY: ${{ date('%y.%m.%d' }}
+  
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push request events but only for the "variables" branch
@@ -52,3 +54,4 @@ jobs:
           echo "job one: "$JOB_ONE
           echo "job two: "$JOB_TWO
           echo "sha: "$SHA
+          echo "today: ${TODAY}"
