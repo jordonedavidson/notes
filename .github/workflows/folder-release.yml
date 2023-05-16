@@ -1,0 +1,72 @@
+env:
+  PROD_NAME: ${{ format('{0}_{1}', 'prod', github.sha) }}
+
+on:
+  push:
+    tags-ignore:
+    branches: ["folder/**"]
+
+jobs:
+  set_variables:
+    runs-on: ubuntu-latest
+
+    outputs:
+      tag: ${{ steps.calculate.outputs.tag }}
+      version: ${{ steps.calculate.outputs.version }}
+
+    steps:
+      - id: calculate
+        name: Calulate variables
+        run: |
+          tag=1.3.1
+          echo "tag=${tag}" >> $GITHUB_OUTPUT
+          version=${GITHUB_REF_NAME##*/}
+          echo "version=${version}" >> $GITHUB_OUTPUT
+
+  create_latest_web_image:
+    runs-on: ubuntu-latest
+    needs: ["set_variables"]
+
+    env:
+      TAG: ${{ needs.set_variables.outputs.tag }}
+      VERSION: ${{ needs.set_variables.outputs.version }}
+
+    steps:
+      # Connect to mta docker registry
+      - name: Connect to docker
+        uses: docker/login-action@v2
+        with:
+          registry: docker.mta.ca
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      # Get the web image to work with.
+      - name: Pull the tagged image
+        run: docker pull docker.mta.ca/drupal_nginx:${{ env.TAG }}
+
+      - name: Tag the image with latest version
+        run: |
+          docker run --rm -d --name ${{ env.PROD_NAME }} docker.mta.ca/drupal_nginx:${{ env.TAG }}
+          docker commit --message "Save ${{ env.TAG }} image to latest" ${{ env.PROD_NAME }} ${{ env.PROD_NAME }}
+          docker tag ${{ env.PROD_NAME }} docker.mta.ca/drupal_nginx:latest
+          docker tag ${{ env.PROD_NAME }} docker.mta.ca/drupal_nginx:v${{ env.VERSION }}
+          docker push docker.mta.ca/drupal_nginx:latest
+          docker push docker.mta.ca/drupal_nginx:v${{ env.VERSION }}
+
+  tag_the_code:
+    runs-on: ubuntu-latest
+    needs: ["set_variables", "create_latest_web_image"]
+
+    env:
+      VERSION: ${{ needs.set_variables.outputs.version }}
+
+    steps:
+      - name: Load codebase
+        uses: actions/checkout@v3
+
+      - name: Tag the code
+        run: |
+          git config user.name "Webmaster"
+          git config user.email "webmaster@mta.ca"
+          git tag -a v${{ env.VERSION }} -m "Tag description"
+          git push --tags
