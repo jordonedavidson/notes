@@ -25,6 +25,7 @@ jobs:
       W2: ${{ steps.workflow.outputs.WORKFLOW_TWO }}
       J1: ${{ steps.job.outputs.JOB_ONE }}
       J2: ${{ steps.job.outputs.JOB_TWO }}
+      VERSION: ${{ steps.job.outputs.version_num }}
 
     steps:
       - id: workflow
@@ -36,6 +37,8 @@ jobs:
         run: |
           echo "JOB_ONE=1234" >> $GITHUB_OUTPUT
           echo "JOB_TWO=dave" >> $GITHUB_OUTPUT
+          version_num=${GITHUB_REF_NAME##*/}
+          echo "version_num=${version_num}" >> $GITHUB_OUTPUT
 
   report_on_variables:
     runs-on: ubuntu-latest
@@ -46,6 +49,7 @@ jobs:
       WORKFLOW_TWO: ${{ needs.set_variables.outputs.W2 }}
       JOB_ONE: ${{ needs.set_variables.outputs.J1 }}
       JOB_TWO: ${{ needs.set_variables.outputs.J2 }}
+      VERSION: ${{ needs.set_variables.outputs.VERSION }}
 
     steps:
       - name: report variables
@@ -56,3 +60,4 @@ jobs:
           echo "job two: "$JOB_TWO
           echo "sha: ${SHA}"
           echo "github ref: "${{ github.ref_name }}
+          echo "version: ${VERSION}"
