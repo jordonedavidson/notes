@@ -53,3 +53,4 @@ jobs:
           echo "job one: "$JOB_ONE
           echo "job two: "$JOB_TWO
           echo "sha: ${SHA}"
+          echo "github ref"${{ github.ref_name }}
